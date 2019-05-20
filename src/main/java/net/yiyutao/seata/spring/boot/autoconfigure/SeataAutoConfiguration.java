@@ -26,7 +26,7 @@ import javax.sql.DataSource;
  * @version 1.0
  **/
 @Configuration
-@ConditionalOnClass({DruidDataSource.class,DataSourceProxy.class,SqlSessionFactory.class})
+@ConditionalOnClass({DruidDataSource.class, DataSourceProxy.class, SqlSessionFactory.class})
 @ConditionalOnBean(DataSource.class)
 public class SeataAutoConfiguration {
 
@@ -38,24 +38,26 @@ public class SeataAutoConfiguration {
     @Bean
     @Primary
     @ConditionalOnMissingBean
-    public DruidDataSource druidDataSource(){
+    public DruidDataSource druidDataSource() {
         return DruidDataSourceBuilder.create().build();
     }
 
     /**
      * init datasource proxy
-     * @param druidDataSource   datasource bean instance
+     *
+     * @param druidDataSource datasource bean instance
      * @return : DataSourceProxy  datasource proxy
      */
     @Bean
     @ConditionalOnMissingBean
-    public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource){
+    public DataSourceProxy dataSourceProxy(DruidDataSource druidDataSource) {
         return new DataSourceProxy(druidDataSource);
     }
 
     /**
      * init mybatis sqlSessionFactory
-     * @param dataSourceProxy   datasource proxy
+     *
+     * @param dataSourceProxy datasource proxy
      * @return DataSourceProxy  datasource proxy
      */
     @Bean
@@ -80,6 +82,6 @@ public class SeataAutoConfiguration {
     @ConditionalOnMissingBean
     @ConditionalOnProperty(value = "spring.application.name", matchIfMissing = true)
     public GlobalTransactionScanner globalTransactionScanner(@Value("${spring.application.name}") String applicationName) {
-        return new GlobalTransactionScanner(applicationName+"-seata", "my_test_tx_group");
+        return new GlobalTransactionScanner(applicationName + "-seata", "my_test_tx_group");
     }
 }
