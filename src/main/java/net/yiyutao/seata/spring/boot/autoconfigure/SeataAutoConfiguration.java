@@ -1,14 +1,3 @@
-# seata-spring-boot-starter
-阿里巴巴开源分布式事务框架[seata](https://github.com/seata/seata)与spring-boot集成  
-开箱即用，在需要开启分布式事务的方法上面添加注解@GlobalTransactional即可  
-此项目适用与用apache-dubbo框架搭建的微服务  
-项目包含：
-- mybatis
-- druid（阿里巴巴开源连接池）
-- pagehelper  
-
-seata框架需要对DataSource对象生成代理，事务才会生效  
-```Java
 package net.yiyutao.seata.spring.boot.autoconfigure;
 
 import com.alibaba.druid.pool.DruidDataSource;
@@ -94,5 +83,3 @@ public class SeataAutoConfiguration {
         return new GlobalTransactionScanner(applicationName+"-seata", "my_test_tx_group");
     }
 }
-
-```
